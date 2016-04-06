@@ -1,132 +1,132 @@
-# Skillforest
+# Лес навыков
 
-Skillforest is a tool for tracking skillsets and ways to improve them. A "skilltree", a well-known concept in role-playing games (RPGs), is a set of skills with some depending on the others. Skillforest is an environment where individual skilltrees grow and interact. Hence, **skillforest**.
+Лес навыков это инструмент для отслеживания навыков и способов их развивать. "Дерево навыков", хорошо известное понятие в ролевых играх (RPG), это набор навыков, в котором некоторые навыки зависят от некоторых других. Лес навыков то среда, где **отдельные деревья** навыков могут расти и взаимодействовать между собой. Отсюда и название **"лес навыков"**.
 
-This project is currently in the **design phase**, implementation hasn't even begun. Since this project will likely involve federation-like interaction between servers, specifying that interaction as formally as possible is important on early stages so multiple implementations of this spec can grow and highlight the inconsistencies.
+Сейчас проект **на стадии проектирования**, реализация даже не началась. Поскольку в проекте наверняка будет иметь место взаимодействие между серверами по принципу "федерации", определить это взаимодействие максимально формально важно на ранних стадиях проекта, чтобы разные реализации этой спецификации могли развиваться параллельно и быстрее показывать слабые места.
 
-## Rationale
+## Зачем это надо
 
-Many attempts have been made to "gamify" the process of gaining technical skills. Most of them are fairly direct translations of in-game concepts to real-world skills: achievements, levels, etc. But applying the same concepts to actual skills are a **big simplification**. So big that it doesn't look right in many ways.
+Известно множество попыток "игрофицировать" процесс получения технических навыков. Большая их часть это более-менее прямые применения игровых концепций к реальным навыкам: достижения, уровни, и т. д. Но применение тех же концепций к реальным навыкам требует **серьёзных упрощений**. Настолько серьёзных, что в результате получается масса слабых мест.
 
-The birth of this concept was "triggered" by a suggestion on [meta.ru.StackOverflow][3] to gather community-maintained "lists of skills and knowledge", loosely divided into levels of "beginner", "intermediate" and "advanced", with relevant materials available for every point.
+Разработка этой концепции началась в ответ на предложение на [meta.ru.StackOverflow][3] собирать "СПИски Навыков И Знаний", грубо разбитые на уровни "начальный", "средний" и "продвинутый", где к каждому пункту приложены материалы для изучения.
 
-The community has currently settled for "reading lists", consisting of community-maintained answers with lists of books on topic specified by a question. But this doesn't really answer the question of "what should I know to be hired". Questions like these are a bad fit for StackOverflow anyway, but they still come up from time to time and need to be answered, at least somewhere else. Of course, **there is no single answer**, there are choices to make.
+Сейчас в сообществе принято составлять "списки литературы", состоящие из общих ответов со списками книг по теме вопроса. Но это плохо отвечает на вопрос "что мне нужно знать, чтобы получить работу". Подобные вопросы всё равно плохо ложатся на формат StackOverflow, но время от времени их задают и хоть где-то на них ответить стоит. Разумеется, **единственно верного ответа нет**, ведь на определённых этапах нужно будет делать выбор.
 
-## The idea
+## Идея
 
-Just a list of skills divided into categories doesn't really work:
+Просто разбитый на категории список навыков свою задачу выполняет плохо:
 
-* A list implies order, at least order of appearance, even though it has no real significance
-* Levels such as "beginner", "intermediate" and "advanced" are arbitrary and subjective
-* Skills don't fit into a linear structure, some of them depend on the others
+* В списке всегда есть порядок, хотя бы перечисления, даже если никакого значения этому порядку при написании не придавалось
+* Уровни "начальный", "средний" и "продвинутый" субъективны и неоднозначны
+* Навыки не выстраиваются в линейную структуру, а между её элементами встречаются непростые зависимости
 
-We tackle these points by using a [**graph**][1] instead. Skills are **nodes** of this graph, connected with **requirements**. The process of tracking skills revolves around the user's ability to **mark** and **unmark** skills. Having a certain skill **marked** is a claim of having mastered it.
+Мы решаем все эти недостатки использованием [**графа**][1] вместо спсика. Навыки представлены в виде **узлов** графа, соединённых рёбрами-**требованиями**. Процесс отслеживания навыков строится вокруг **установки** и **снятия** отметок с навыков. **Отметка** на навыке это заявление о владении этим навыком.
 
-The tool is not intended to check whether it's actually true, it's intended to *guide* self-improvement and it relies on the user being honest with himself. However, the intention is *to not restrict implementations from performing such checks* on an attempt to mark a skill. It just doesn't seem feasible at the time, but may be very well possible within certain education systems.
+Инструмент не предполагает необходимости проверять, справедливы ли отметки, его задача *задавать направление* самообучению, ожидается, что с самим собой пользователь будет честен. Однако, *явного запрета на проверку справедливости ответок при их установке тоже не накладывается*. Сейчас это попросту не выглядит реализуемым, но в определённых обучающих средах может быть вполне возможно.
 
-Skillforests are meant to be **federated**, in that a single user might be using **multiple skillforests** at once in this workflow, possibly located on *different servers* (hence, a *federation* of servers), and **skillforests can reference other skillforests**, in which case clients have to load and use the dependent skillforests as well.
+Леса навыков образуют **федерацию**, каждый отдельный пользователь может использовать **несколько лесов** одновременно, возможно даже размещённых *на разных серверах* (отсюда "*федерация* серверов"), а также **одни леса могут ссылаться на другие**, в этих случаях клиенты вынуждены кроме интересующего леса загружать и все леса, от которых он зависит.
 
-> This tool assumes that the learner and the maintainer of skillforest are different. Still, constructing the skillforest while progressing through it at the same time may be possible for advanced self-learners. Whether this could work needs to be tested.
+> Инструмент создаётся из предоложения, что обучающийся и составитель леса -- разные лица. Впрочем, особо продвинутые в самообучении люди, возожно, смогут составлять лес по мере продвижения по нему же. Стоит проверить, будет ли то работать на практике.
 
-## Example
+## Пример
 
-### Background
+### Ситуация
 
-* There is a public UI client that anyone can open witha  web browser.
-* Bob maintains a Ruby skillforest.
-* Jack maintains a Rails skillforest
-  - Some of the Rails skillforest's skills require some Ruby skills, so Jack referenced Bob's Ruby skillforest in some places
+* Есть общедоступный веб-клиент, который любой желающий может открыть в браузере.
+* Дима занимается поддержкой леса навыков по Ruby.
+* Вася занимается поддержкой леса навыков по Rails.
+  - Некоторые навыки в лесу по Rails требуют навыков Ruby, потому Вася ссылается на лес Димы по Ruby в некоторых местах
 
-### Action
+### Деятельность
 
-* Paul wants to learn Rails.
-* Paul stumbles upon "this whole skillforest thing" and decides to use it to guide his path.
-* Paul finds a link that starts the skillforest client with Rails skillforest.
-* Paul's browser loads the client, sees the Rails skillforest in URL and downloads a skillforest
-* *(Lazy/eager?)* Paul's browser, seeing that some of the Rails skills require some Ruby skills, downloads Bob's Ruby skillforest too
-* Point of entry: the skillforest client starts, showing only the nodes with **no requirements**
-  - This should probably be *"I want to learn X!"* for every skillforest (best practice? allow multiple entry points?)
-  - Given that 2 skillforests are loaded at the same time and none of them is the **main** one (is that necessary?), there have to be multiple entry points: one for Ruby, one for Rails, but Paul knows what he wants
-* Paul marks the Rails entry point, "I want to learn Rails!"
-  - This node contains the references to learn about **what Rails is** and by marking it, Paul claims to know that
-  - UI displays the possible next steps
-* *(Main loop)* Paul picks a node and studies the materials it references until he feels confident that he knows everything what this node is about
-* After a bit of practice (and marked nodes as well!), Paul stumbles upon a Rails skill which requires a Ruby skill from the branch he hasn't even started; UI shows a path to all the skills required for that, until it hits nodes that can be marked (Ruby entry point in this case)
-* Willing to progress, he marks "I want to learn Ruby!" and receives materials on the matter
-  - In practice that will probably happen pretty fast if not right away: to **run** Rails, one has to set up a Ruby environment first
-* After a bit of practice with Ruby, he achieves the level of understanding necessary to go on with Rails, but likes Ruby and decides to progress further into Ruby skillforest instead
+* Паша загорелся мыслью изучить Rails.
+* Паша наткнулся на "всю эту затею с лесами навыков" и решил их использовать, чтобы придать процессу изучения направление.
+* Паша натыкается на ссылку, которая запускает веб-клиент для леса навыков по Rails.
+* Пашин браузер загружает клиент, замечает в URL ссылку на лес навыков по Rails и загружает его
+* *(Лениво/сразу?)* Пашин браузер, видя, что некоторые навыки Rails зависят от некоторых навыков Ruby, загружает Димин лес навыков по Ruby
+* Точка входа: веб-клиент леса навыков запускается, поначалу показывая только узлы **без требований**
+  - Скорее всего, это должен был узел с заголовком вида *"Хочу изучить X!"* для каждого леса (закрепить как хорошую практику? позволить несколько точек входа?)
+  - Поскольку в клиент загружено 2 леса навыков и никакой из них не является *главным* (это вообще нужно?), точек точно должно быть несколько: одна по Ruby, одна по Rails, но ведь Паша помнит, зачем он за это взялся
+* Паша ставит отметку на точке входа в Rails, с заголовком "Хочу изучить Rails!"
+  - В этом узле содержатся ссылки на источники о том **что такое Rails**, и отмечая этот узел, Паша заявляет, что знает это
+  - Интерфейс выводит возможные дальнейшие направления
+* *(Главный цикл)* Паша выбирает узел и изучает указанные в нём материалы, пока не решает, что изучил всё, чего этот узел касается
+* Позанимавшись (и поотмечав немного узлов!), Паша натыкается на навык Rails, требующий определённого навыка Ruby из ветки, которую он даже не начал; интерфейс выводит пути до всех навыков, которые ему потребуются, до узлов, которые Паша уже может отметить (в данном случае точка входа в Ruby)
+* Полный решимости продолжать, он отмечает "Хочу изучить Ruby!", изучив материалы по теме
+  - На практике это должно произойти если не сразу, то очень быстро: чтобы **запустить** Rails, надо сначала организовать на компьютере среду для работы с Ruby.
+* Попрактиковавшись с Ruby, он доходит до уровня, достаточного для продолжения леса Rails, но проникается интересом к Ruby и решает продолжать изучение в сторону Ruby
 * ???
 
-> The example is simplified, of course. E. g. it doesn't mention an OS shell.
+> Пример, конечно, сильно упрощён. К примеру, не упомянута работа с командой строкой
 
-## Goals
+## Цели
 
-* Describe the abstractions behind the skillforest
-* Develop non-interactive example skillforests for several related technologies
-* Design a file format (possibly more than one?) for transmission of skillforests
-  - Start with autonomous skillforests, add cross-references when ready
-* Outline the process and best practices of maintaining a graph
-  - Graphs change, clients either need to remember the version they're tracking or need to adapt to changes
-    + Determine behaviour in case of structural conflicts of user-defined state and new version of the graph
-    + Cache policy (cache once in use, upgrade explicitly?)
-    + Bind user-defined state to specific version and let implementations decide on migration?
-    + Determine whether update notification mechanisms are necessary and whether an optional mechanism is possible
-  - Develop a linting tool
-    + Check general structure (schema? JSON schema?)
-    + Check acyclicity
-* Develop a proof-of-concept UI
-  - Don't bother with multiple versions initially
-* Mobile app? (Kidding or not?)
-* State migration between clients? (File? Permalink?)
-* Determine the use of URLs (relative, absolute?)
-* Think over the implications of having multiple disjoint skillforests in a single session
-* Extension policy: what extra fields are allowed? How to deal with conflicts?
+* Описать абстракции вокруг и внутри леса навыков
+* Разработать неинтерактивные леса навыков (в качестве примера) для нескольких связанных технологий
+* Разработать формат (возможно, не один?) для передачи лесов
+  - Сначала автономных, потом со ссылками
+* Обозначить процесс и хорошие практики, связанные с поддержкой леса
+  - Графы со временем меняются авторами, клиентам надо либо запоминать версию, с которой они начали, либо адаптироваться к изменениям
+    + Определить поведение в случае конфликтов между состоянием у пользователя и изменившейся структурой леса
+    + Правила кэширования (начал использовать -- в кэш, обновлять только явно?)
+    + Привязать состояние у пользователя к конкретной версии леса и дать реализациям решать, как обновляться?
+    + Понять, нужны ли механизмы проверки наличия обновлений и можно ли сделать такой механизм необязательным
+  - Разработать проверялку
+    + Проверять общую структуру (схема? JSON schema?)
+    + Проверять ацикличность
+* Разработать интерфейс-прототип
+  - ...первое время не парясь о том, что версий может быть много
+* Мобильное приложение? (Шутка или не очень?)
+* Передача состояния между клиентами? (Файлом? Внутри ссылки?)
+* Определить, как использовать URL (относительные, абсолютные?)
+* Подумать над особенностями работы в одной сессии с несколькими непересекающимися лесами сразу
+* Политика расширений: как относимся к дополнительным полям? Как избежать конфликтов расширений?
 
-## Philosophy
+## Философия
 
-* **Don't overwhelm. Motivate to learn** by showing that "it's not **that** hard".
-  - Don't show too much information at once. Introduce new information only when the user is ready to digest it.
-  - ...but don't get in the way. If the user wans to see "the whole picture" it's his own choice.
-  - Continuing analogy with Rails, you won't need *too much* of Ruby to work with Rails, and a full-fledged Ruby book might seem a bit intimidating (making a *first step* may be the hardest challenge).
-* **Leave choices.** If hitting a particular level opens up multiple learning possibilities, leave choice to the user.
-  - This is particularly different from learning "by the book" in the order imposed "by the book" and allows the user to keep learning even if he's stuck in a certain direction. He can just choose a different one and come back later.
-  - "A Well-Grounded Rubyist" by David Black discusses topics about Ruby in breadth-first order; it's mentioned in the book itself; this is a case when a piece of knowledge being a book may be a limiting factor (an exaggeration, perhaps)
-* **Stay on-topic.** If learning one technology requires to learn another one, consider extracting it into a separate skillforest.
-  - Using a skillforest maintained by a 3rd party may be a good idea, it could open new horizons even for the maintainer of related skillforest!
-  - A skillforest for that separate technology might be needed for some other technology. Like, Ruby shouldn't be **embedded** into Rails, since... Well, Chef uses Ruby too. Calabash as well. And many others!
+* **Не перегружать. Мотивировать учиться** показывая "это не **настолько** сложно".
+  - Не надо вываливать кучу информации разом. Выводить новую информацию только когда пользователь готов её воспринимать.
+  - ...но при этом не мешать. Если пользователь явно хочет увидеть "всю картину", это его выбор.
+  - Продолжая аналогию с Rails, вам не нужно *досконально* знать Ruby, чтобы работать с Rails, а полноценная книга по Ruby может уже оглавлением подействовать угнетающе (а делать первый шаг порой бывает *сложнее всего*).
+* **Оставлять выбор.** Если определённая точка открывает несколько вариантов дальнейших тем для изучения, выбор надо оставить пользователю.
+  - Это существенное отличие от обучения "по книжке" в порядке, навязанном книгой, пользователь может продолжать учиться даже если в каком-то направлении он застрял. Он может просто на время заняться другим направлением, а к этому вернуться позже.
+  - Книга "A Well-Grounded Rubyist" за авторством Дэвида Блэка освещает разные стороны Ruby в порядке "поиска в ширину"; в книге прямо так и написано; возможно, исполнение этой порции знаний в виде книги наложило определённые нежелательные ограничения (хотя может это и преувеличение)
+* **Придерживайтесь выбранной темы.** Если для изучения одной технологии нужно изучить сколько-то тем по другой, надо стараться вынести эти темы в отдельный лес навыков.
+  - Ссылка на чужой лес навыков может быть хорошей идеей, это может открыть новые темы для изучения даже составителю!
+  - Лес по этой технологии может потребоваться и для других технологий. К примеру, навыки Ruby не надо вшивать **внутрь** леса по Rails, ведь... Ну, Chef использует Ruby. Calabash тоже. И другие проекты!
 
-## Uses
+## Зачем
 
-* Tracking self-improvement, obviously
-* A concise way to show your skills to those that are interested: "details available on-demand, a lot of them"
+* Отслеживать собственное самообучение, очевидно
+* Простой способ наглядно сообщить о своих навыках тем, кто ими интересуется: "детали там по запросу можно получить, и много!"
 
-## Theory
+## Теория
 
-The main abstraction is a **skill**. The **skillforest** is defined as an oriented acyclic [graph][1], where nodes (vertices) are **skills** and connections (edges) are **requirements**. For every user every node can either be **marked** or **unmarked**. Every **skill** can be in one of the following states, defined in terms of being **marked**/**unmarked** and its surroundings:
+Основная абстракция это **навык**. **Лес навыков** определяется, как ориентированный ациклический [граф][1], где отдельные узлы (вершины) представляют **навыки** а соединения (рёбра) представляют **требования**. Для каждого пользователя каждый узел может быть **отмечен** или **не отмечен**. Каждый **навык** может быть в одном из следующих состояний, определённых в терминах **наличия**/**отсутствия отметки** и окружающих узлов:
 
-* Mastered -- "the edge" of mastered skills in a certain direction that hasn't yet been built upon
-  - **Marked**
-  - All the skills that are required for it are **unmarked**
-* Known -- skills for which all the requirements have been mastered, as such, these skills can now be mastered too
-  - **Unmarked**
-  - All the skills that are required for it (possibly *none*, via [vacuous truth][2]) are **marked**
-* Unknown -- skill that is so far from the current skillset that may not even be known yet
-  - **Unmarked**
-  - There is *at least one* **unmarked** skill required for it
-* Active -- actively used in that other skills have been mastered that require it
-  - Marked
-  - There is *at least one* **marked** skill that requires it
+* Освоен -- "самый край", освоенный, но ещё не применённый в освоении других навык
+  - **Имеет отметку**
+  - Все навыки, для которых он требуется **отметок не имеют**
+* Виден -- навык, все требования для которого освоены, его можно осваивать сейчас
+  - **Не имеет отметки**
+  - Все навыки, требуемые для него (возможно, таких нет, [согласно vacuous truth][2] условие выполняется всегда) **отмечены**
+* Неизвестен -- навык, находящийся настолько далеко от освоенных, что о его существовании можно даже не догадываться
+  - **Не имеет отметки**
+  - Существует *хотя бы один* **не имеющий отметки** навык, требуемый для него
+* Активен -- использовался для постижения других навыков, применялся на практике
+  - **Имеет отметку**
+  - Существует *хотя бы один* **имеющий отметку** навык, требующий его
 
-> Being a "requirement" is a property of edges. Whether we need other forms of dependency, such as "discovery", when marking any given skill's discovery-dependent node *discovers* that skill, is undecided; use cases are needed for that.
+> "Требуемость" это разновидность ребра графа. Нужны ли для навыков другие формы зависимости, как то "открытие", для которого отметка *любого* зависимого узла "открывает" (делает "видным") этот навык, непонятно; надо подобрать примеры использования.
 
 ---
 
-#### To be continued...
+#### Прдолжение следует...
 
-## References
+## Ссылки
 
-* [Initial concept (in Russian)][3].
+* [Изначальная концепция][3].
 
-  [1]: https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)
+  [1]: https://ru.wikipedia.org/wiki/%D0%93%D1%80%D0%B0%D1%84_%28%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0%29
   [2]: https://en.wikipedia.org/wiki/Vacuous_truth
   [3]: http://meta.ru.stackoverflow.com/a/2793/181100
