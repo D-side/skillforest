@@ -24,7 +24,9 @@ We tackle these points by using a [**graph**][1] instead. Skills are **nodes** o
 
 The tool is not intended to check whether it's actually true, it's intended to *guide* self-improvement and it relies on the user being honest with himself. However, the intention is *to not restrict implementations from performing such checks* on an attempt to mark a skill. It just doesn't seem feasible at the time, but may be very well possible within certain education systems.
 
-Skillforests are meant to be **federated**, in that a single user might be using **multiple skillforests** at once in this workflow, and **skillforests can reference other skillforests**, in which case clients have to load and use the dependent graphs as well.
+Skillforests are meant to be **federated**, in that a single user might be using **multiple skillforests** at once in this workflow, possibly located on *different servers* (hence, a *federation* of servers), and **skillforests can reference other skillforests**, in which case clients have to load and use the dependent skillforests as well.
+
+> This tool assumes that the learner and the maintainer of skillforest are different. Still, constructing the skillforest while progressing through it at the same time may be possible for advanced self-learners. Whether this could work needs to be tested.
 
 ## Example
 
@@ -48,7 +50,8 @@ Skillforests are meant to be **federated**, in that a single user might be using
 * Paul marks the Rails entry point, "I want to learn Rails!"
   - This node contains the references to learn about **what Rails is** and by marking it, Paul claims to know that
   - UI displays the possible next steps
-* After a bit of practice, Paul stumbles upon a Rails skill which requires a Ruby skill from the branch he hasn't even started; UI shows a path to all the skills required for that, until it hits nodes that can be marked (Ruby entry point in this case)
+* *(Main loop)* Paul picks a node and studies the materials it references until he feels confident that he knows everything what this node is about
+* After a bit of practice (and marked nodes as well!), Paul stumbles upon a Rails skill which requires a Ruby skill from the branch he hasn't even started; UI shows a path to all the skills required for that, until it hits nodes that can be marked (Ruby entry point in this case)
 * Willing to progress, he marks "I want to learn Ruby!" and receives materials on the matter
   - In practice that will probably happen pretty fast if not right away: to **run** Rails, one has to set up a Ruby environment first
 * After a bit of practice with Ruby, he achieves the level of understanding necessary to go on with Rails, but likes Ruby and decides to progress further into Ruby skillforest instead
