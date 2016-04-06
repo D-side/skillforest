@@ -45,7 +45,9 @@ Skillforests are meant to be **federated**, in that a single user might be using
 * Point of entry: the skillforest client starts, showing only the nodes with **no requirements**
   - This should probably be *"I want to learn X!"* for every skillforest (best practice? allow multiple entry points?)
   - Given that 2 skillforests are loaded at the same time and none of them is the **main** one (is that necessary?), there have to be multiple entry points: one for Ruby, one for Rails, but Paul knows what he wants
-* Paul marks the Rails entry point, "I want to learn Rails!", UI displays the possible next steps
+* Paul marks the Rails entry point, "I want to learn Rails!"
+  - This node contains the references to learn about **what Rails is** and by marking it, Paul claims to know that
+  - UI displays the possible next steps
 * After a bit of practice, Paul stumbles upon a Rails skill which requires a Ruby skill from the branch he hasn't even started; UI shows a path to all the skills required for that, until it hits nodes that can be marked (Ruby entry point in this case)
 * Willing to progress, he marks "I want to learn Ruby!" and receives materials on the matter
   - In practice that will probably happen pretty fast if not right away: to **run** Rails, one has to set up a Ruby environment first
@@ -83,7 +85,7 @@ Skillforests are meant to be **federated**, in that a single user might be using
   - Don't show too much information at once. Introduce new information only when the user is ready to digest it.
   - ...but don't get in the way. If the user wans to see "the whole picture" it's his own choice.
   - Continuing analogy with Rails, you won't need *too much* of Ruby to work with Rails, and a full-fledged Ruby book might seem a bit intimidating (making a *first step* may be the hardest challenge).
-* Leave choices. If hitting a particular level opens up multiple learning possibilities, leave choice to the user.
+* **Leave choices.** If hitting a particular level opens up multiple learning possibilities, leave choice to the user.
   - This is particularly different from learning "by the book" in the order imposed "by the book" and allows the user to keep learning even if he's stuck in a certain direction. He can just choose a different one and come back later.
   - "A Well-Grounded Rubyist" by David Black discusses topics about Ruby in breadth-first order; it's mentioned in the book itself; this is a case when a piece of knowledge being a book may be a limiting factor (an exaggeration, perhaps)
 * **Stay on-topic.** If learning one technology requires to learn another one, consider extracting it into a separate skillforest.
