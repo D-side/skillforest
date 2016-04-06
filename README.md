@@ -1,5 +1,11 @@
 # Skillforest
 
+> Русская версия поддерживается [в ветке `ru`](https://github.com/D-side/skillforest/tree/ru). Основной является версия на английском языке.
+>
+> Предлагать изменения на русском тоже можно, в порядке [обсуждения](https://github.com/D-side/skillforest/issues/new), в первую очередь изменения будут вноситься в английскую версию, и в русскую только переводиться (что при наличии обсуждения на русском будет максимально просто).
+>
+> Это всего лишь набор определений, использоваться они, скорее всего, поначалу будут именно для русскоязычных произведений. Английский язык выбран, как [*lingua franca*](https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B3%D0%B2%D0%B0_%D1%84%D1%80%D0%B0%D0%BD%D0%BA%D0%B0) индустрии, чтобы проект можно было продемонстрировать и коллегам, не говорящим на русском языке: в англоязычной среде знаний и источников всё-таки намного больше и развиться подобные вещи в ней могут гораздо сильнее.
+
 Skillforest is a tool for tracking skillsets and ways to improve them. A "skilltree", a well-known concept in role-playing games (RPGs), is a set of skills with some depending on the others. Skillforest is an environment where individual skilltrees grow and interact. Hence, **skillforest**.
 
 This project is currently in the **design phase**, implementation hasn't even begun. Since this project will likely involve federation-like interaction between servers, specifying that interaction as formally as possible is important on early stages so multiple implementations of this spec can grow and highlight the inconsistencies.
