@@ -12,7 +12,7 @@ This project is currently in the **design phase**, implementation hasn't even be
 
 ## Rationale
 
-Many attempts have been made to "gamify" the process of gaining technical skills. Most of them are fairly direct translations of in-game concepts to real-world skills: achievements, levels, etc. But applying the same concepts to actual skills are a **big simplification**. So big that it doesn't look right in many ways.
+Many attempts have been made to "gamify" the process of gaining technical skills. Most of them are fairly direct translations of in-game concepts to real-world skills: achievements, levels, etc. But applying the same concepts to actual skills is a **big simplification**. So big that it doesn't look right in many ways.
 
 The birth of this concept was "triggered" by a suggestion on [meta.ru.StackOverflow][3] to gather community-maintained "lists of skills and knowledge", loosely divided into levels of "beginner", "intermediate" and "advanced", with relevant materials available for every point.
 
@@ -30,29 +30,29 @@ We tackle these points by using a [**graph**][1] instead. Skills are **nodes** o
 
 The tool is not intended to check whether it's actually true, it's intended to *guide* self-improvement and it relies on the user being honest with himself. However, the intention is *to not restrict implementations from performing such checks* on an attempt to mark a skill. It just doesn't seem feasible at the time, but may be very well possible within certain education systems.
 
-Skillforests are meant to be **federated**, in that a single user might be using **multiple skillforests** at once in this workflow, possibly located on *different servers* (hence, a *federation* of servers), and **skillforests can reference other skillforests**, in which case clients have to load and use the dependent skillforests as well.
+Skillforest is a **federation** of skilltrees, in that a single user might be using **multiple skilltrees** at once in this workflow, possibly located on *different servers* (hence, a *federation* of servers), and **skilltrees can reference other skilltrees**, in which case clients have to load and use the dependent skilltrees as well.
 
-> This tool assumes that the learner and the maintainer of skillforest are different. Still, constructing the skillforest while progressing through it at the same time may be possible for advanced self-learners. Whether this could work needs to be tested.
+> This tool assumes that the learner and the maintainer of skilltree are different (especially considering a single field rarely contains a *single* tree). Still, constructing the skilltree while progressing through it at the same time may be possible for advanced self-learners. Whether this could work needs to be tested.
 
 ## Example
 
 ### Background
 
-* There is a public UI client that anyone can open witha  web browser.
-* Bob maintains a Ruby skillforest.
-* Jack maintains a Rails skillforest
-  - Some of the Rails skillforest's skills require some Ruby skills, so Jack referenced Bob's Ruby skillforest in some places
+* There is a public UI client that anyone can open with a web browser.
+* Bob maintains a Ruby skilltree
+* Jack maintains a Rails skilltree
+  - Some of the Rails skilltree's skills require some Ruby skills, so Jack referenced Bob's Ruby skilltree in some places
 
 ### Action
 
 * Paul wants to learn Rails.
 * Paul stumbles upon "this whole skillforest thing" and decides to use it to guide his path.
-* Paul finds a link that starts the skillforest client with Rails skillforest.
-* Paul's browser loads the client, sees the Rails skillforest in URL and downloads a skillforest
-* *(Lazy/eager?)* Paul's browser, seeing that some of the Rails skills require some Ruby skills, downloads Bob's Ruby skillforest too
+* Paul finds a link that starts the skillforest client with Rails skilltree.
+* Paul's browser loads the client, sees the Rails skilltree in URL and downloads it
+* *(Lazy/eager?)* Paul's browser, seeing that some of the Rails skills require some Ruby skills, downloads Bob's Ruby skilltree too
 * Point of entry: the skillforest client starts, showing only the nodes with **no requirements**
-  - This should probably be *"I want to learn X!"* for every skillforest (best practice? allow multiple entry points?)
-  - Given that 2 skillforests are loaded at the same time and none of them is the **main** one (is that necessary?), there have to be multiple entry points: one for Ruby, one for Rails, but Paul knows what he wants
+  - This should probably be *"I want to learn X!"* for every skilltree (best practice? allow multiple entry points?)
+  - Given that 2 skilltrees are loaded at the same time and none of them is the **main** one (is that necessary?), there have to be multiple entry points: one for Ruby, one for Rails, but Paul knows what he wants
 * Paul marks the Rails entry point, "I want to learn Rails!"
   - This node contains the references to learn about **what Rails is** and by marking it, Paul claims to know that
   - UI displays the possible next steps
@@ -60,7 +60,7 @@ Skillforests are meant to be **federated**, in that a single user might be using
 * After a bit of practice (and marked nodes as well!), Paul stumbles upon a Rails skill which requires a Ruby skill from the branch he hasn't even started; UI shows a path to all the skills required for that, until it hits nodes that can be marked (Ruby entry point in this case)
 * Willing to progress, he marks "I want to learn Ruby!" and receives materials on the matter
   - In practice that will probably happen pretty fast if not right away: to **run** Rails, one has to set up a Ruby environment first
-* After a bit of practice with Ruby, he achieves the level of understanding necessary to go on with Rails, but likes Ruby and decides to progress further into Ruby skillforest instead
+* After a bit of practice with Ruby, he achieves the level of understanding necessary to go on with Rails, but likes Ruby and decides to progress further into Ruby skilltree instead
 * ???
 
 > The example is simplified, of course. E. g. it doesn't mention an OS shell.
@@ -68,9 +68,9 @@ Skillforests are meant to be **federated**, in that a single user might be using
 ## Goals
 
 * Describe the abstractions behind the skillforest
-* Develop non-interactive example skillforests for several related technologies
-* Design a file format (possibly more than one?) for transmission of skillforests
-  - Start with autonomous skillforests, add cross-references when ready
+* Develop non-interactive example skilltrees for several related technologies
+* Design a file format (possibly more than one?) for transmission of skilltrees
+  - Start with autonomous skilltrees, add implement cross-references when ready
 * Outline the process and best practices of maintaining a graph
   - Graphs change, clients either need to remember the version they're tracking or need to adapt to changes
     + Determine behaviour in case of structural conflicts of user-defined state and new version of the graph
@@ -97,9 +97,9 @@ Skillforests are meant to be **federated**, in that a single user might be using
 * **Leave choices.** If hitting a particular level opens up multiple learning possibilities, leave choice to the user.
   - This is particularly different from learning "by the book" in the order imposed "by the book" and allows the user to keep learning even if he's stuck in a certain direction. He can just choose a different one and come back later.
   - "A Well-Grounded Rubyist" by David Black discusses topics about Ruby in breadth-first order; it's mentioned in the book itself; this is a case when a piece of knowledge being a book may be a limiting factor (an exaggeration, perhaps)
-* **Stay on-topic.** If learning one technology requires to learn another one, consider extracting it into a separate skillforest.
-  - Using a skillforest maintained by a 3rd party may be a good idea, it could open new horizons even for the maintainer of related skillforest!
-  - A skillforest for that separate technology might be needed for some other technology. Like, Ruby shouldn't be **embedded** into Rails, since... Well, Chef uses Ruby too. Calabash as well. And many others!
+* **Stay on-topic.** If learning one technology requires to learn another one, consider extracting it into a separate skilltree.
+  - Using a skilltree maintained by a 3rd party may be a good idea, it could open new horizons even for the maintainer of related skilltree!
+  - A skilltree for that separate technology might be needed for some other technology. Like, Ruby shouldn't be **embedded** into Rails, since... Well, Chef uses Ruby too. Calabash as well. And many others!
 
 ## Uses
 
@@ -108,7 +108,7 @@ Skillforests are meant to be **federated**, in that a single user might be using
 
 ## Theory
 
-The main abstraction is a **skill**. The **skillforest** is defined as an oriented acyclic [graph][1], where nodes (vertices) are **skills** and connections (edges) are **requirements**. For every user every node can either be **marked** or **unmarked**. Every **skill** can be in one of the following states, defined in terms of being **marked**/**unmarked** and its surroundings:
+The main abstraction is a **skill**. A **skilltree** is defined as an oriented acyclic [graph][1], where nodes (vertices) are **skills** and connections (edges) are **requirements**. Several interconnected skilltrees make a **skillforest**. For every user every node can either be **marked** or **unmarked**. Every **skill** can be in one of the following states, defined in terms of being **marked**/**unmarked** and its surroundings:
 
 * Mastered -- "the edge" of mastered skills in a certain direction that hasn't yet been built upon
   - **Marked**
