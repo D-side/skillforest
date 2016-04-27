@@ -80,9 +80,9 @@ Skillforest is a **federation** of skilltrees, in that a single user might be us
   - Develop a linting tool
     + Check general structure (schema? JSON schema?)
     + Check acyclicity
-* Develop a proof-of-concept UI
+* Develop a proof-of-concept client
   - Don't bother with multiple versions initially
-* Mobile app? (Kidding or not?)
+* Mobile app?
 * State migration between clients? (File? Permalink?)
 * Determine the use of URLs (relative, absolute?)
 * Think over the implications of having multiple disjoint skillforests in a single session
@@ -124,6 +124,22 @@ The main abstraction is a **skill**. A **skilltree** is defined as an oriented a
   - There is *at least one* **marked** skill that requires it
 
 > Being a "requirement" is a property of edges. Whether we need other forms of dependency, such as "discovery", when marking any given skill's discovery-dependent node *discovers* that skill, is undecided; use cases are needed for that.
+
+## File format
+
+JSON was chosen as a format for storage and transport of skilltrees for a number of reasons:
+
+* Widely supported on primarily targeted platforms: in browsers (natively) and on mobile devices.
+* Relatively compact, at least compared to XML and YAML (in its *typical* whitespace-rich form).
+* Has a good number of specs using it and is unlikely to change in near future.
+* Has few abstractions (has its downsides in that it does practically **no** validation).
+* Has a dedicated "JSON schema" to describe some of the validations declaratively and bypass the need to port them to different platforms.
+
+One of the first goals of this project is a **validator** for skilltrees. Specific structure is under consideration, notable points are:
+
+* It has to be well-formed JSON. Clients are free to ignore skilltrees consisting of malformed JSON.
+* Skills will reside in a JSON **object** with **unique keys** (this has to be validated since JSON *allows* for duplicate keys). It will not be a root object though, to allow for skilltree-scoped metadata.
+* Skilltree is not allowed to have any properties but those described in a (not yet existent) spec, unless specified otherwise. This will be covered in a schema.
 
 ---
 
