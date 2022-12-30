@@ -37,9 +37,7 @@ It enhances the way you collaborate with fellow educators.
 
 ### So this is yet another learning platform that provides courses?
 
-Not a platform. It's a **standard** that helps teachers collaborate on producing learning materials _together_. Because with better materials, learners can do more as well.
-
-Choice of platforms is up to the people who publish the learning materials. Ownership and control over the materials, however, remain entirely in the hands of authors and users, in the same way it already is for the content on the World Wide Web.
+Not a platform. It's a **standard** that helps teachers collaborate on producing learning materials _together_. Because with better materials, learners can do more as well. Ownership and control over the materials remains entirely in the hands of authors and users. That includes the choice of a platform.
 
 Learning materials for Skillforest can be published anywhere on the Web. With that comes all the power of the Web. Internal materials can be published on internal networks or distributed as files. Authors wishing to paywall their content are free to do so arbitrarily with the tools they already use. This standard _supplements_ existing materials and _facilitates_ their use. It does not in any way replace them.
 
