@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<h2>❔ {{ page.title }}</h2>
+{{ content }}
+
+<blockquote>
+    <strong>Requirements:</strong> {% for title in page.requirements %}
+      {% assign req = site.topics | where: "title", title | first %}
+      <a href="{{ req.url }}">{{ req.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}
+      {% unless page.requirements and page.requirements != empty %}none{% endunless %}
+    <br>
+    <strong>Results:</strong> {% for title in page.results %}
+      {% assign req = site.topics | where: "title", title | first %}
+      <a href="{{ req.url }}">{{ req.title }}</a>{% endfor %}
+      {% unless page.results and page.results != empty %}none{% endunless %}
+</blockquote>

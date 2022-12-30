@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>🌳 {{ page.title }}</title>
+    <style type="text/css">
+      body {
+        display: block;
+        max-width: 60em;
+        margin: auto;
+        font-family: sans-serif;
+        padding: 2vmin;
+      }
+      blockquote {
+        margin: 0.5em 0;
+        padding: 0.5vmin 1vmin;
+        background-color: rgba(0, 0, 0, 0.07);
+      }
+      .muted {
+        opacity: 0.3;
+      }
+      div.mockup {
+        display: block;
+        margin: auto;
+        max-width: 30em;
+        background:rgba(0, 0, 0, 0.07);
+        padding: 2vmin;
+      }
+      footer {
+        border-top: 1px dashed #000;
+        text-align: center;
+        font-size: 0.8em;
+        padding: 2vmin;
+      }
+      footer img {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <blockquote>
+      <h1><a href="/" style="text-decoration: none;">🌳 Skillforest</a></h1>
+    </blockquote>
+    <blockquote>
+      <p><strong>⚠️ Disclaimer:</strong> The address is subject to change and what's written here right now is intended to <em>come</em> true, not <em>be</em> true. Think "documentation-first" development strategy.</p>
+
+      <p>The reason it's published at all is because <em>there is finally an implementation plan</em> for it that <em>might</em> work and enough people seemed interested in the idea.</p>
+    </blockquote>
+    {{ content }}
+    <footer>&copy; 2022{% assign year = site.time | date: '%Y' %}{% if year != "2022" %}-{{ year }}{% endif %} <a href="https://dside.ru/en/">Pavel Peganov</a>, distributed at this time under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Attribution-NonCommercial-ShareAlike 4.0" style="border-width:0" src="/assets/img/cc-by-sa-nc.png" /></a> — which is admittedly a bit too restrictive, but I'm open to suggestions. Source code can be found <a href="https://github.com/D-side/skillforest">on GitHub</a>.</footer>
+  </body>
+</html>

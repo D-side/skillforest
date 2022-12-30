@@ -1,0 +1,6 @@
+# Jekyll's output
+_site
+
+# Local bundle
+.bundle
+vendor

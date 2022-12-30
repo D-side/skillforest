@@ -1,0 +1,14 @@
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      type: "topics"
+    values:
+      layout: "topic"
+
+collections:
+  topics:
+    output: true
+    permalink: "/topics/:title"
